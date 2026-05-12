@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Tracker</title>
+  <style>
+    body { font-family: Arial; margin: 20px; background: #f4f4f4; }
+    .task { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Personal Task Tracker</h1>
+  <div id="tasks"></div>
+
+  <script>
+    async function loadTasks() {
+      const res = await fetch('http://localhost:5000/api/tasks');
+      const tasks = await res.json();
+      document.getElementById('tasks').innerHTML = tasks.map(t => `
+        <div class="task">
+          <h3>${t.title}</h3>
+          <p>Status: ${t.status} | Priority: ${t.priority}</p>
+          <p>Due: ${t.due_date || 'No date'}</p>
+        </div>
+      `).join('');
+    }
+    loadTasks();
+  </script>
+</body>
+</html>

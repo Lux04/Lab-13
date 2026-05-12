@@ -1,1 +1,3 @@
-Generate README and JSDoc.
+# /docs
+
+Generate JSDoc comments and update README sections.
